@@ -7,9 +7,12 @@ require:
 AllCops:
   Exclude:
     - bin/**/*
-    - tmp/**/*
     - vendor/**/*
     - db/schema.rb
+    - coverage/**/*
+    - log/**/*
+    - tmp/**/*
+    - public/**/*
   DisplayCopNames: true
   DisplayStyleGuide: true
   TargetRubyVersion: 3.1.1
@@ -22,28 +25,20 @@ Metrics/MethodLength:
   Enabled: true
   CountComments: false
   Max: 10
-  IgnoredMethods:
-    - change
-    - up
-    - down
+  Exclude:
+    - 'db/migrate/**/*'
 
 Metrics/BlockLength:
   IgnoredMethods:
-    - configure
-    - describe
-    - define
-    - post
-    - path
-    - up
     - create_table
-    - response
-    - put
-    - context
-    - factory
+  Exclude:
+    # Examples are mostly kept in a 1:1 file mapping, and examples can get quite long.
+    - 'spec/**/*'
 
 Metrics/AbcSize:
   Description: A calculated magnitude based on number of assignments, branches, and
     conditions.
+  Max: 19
   IgnoredMethods:
     - change
     - query_string
@@ -53,43 +48,28 @@ Style/Documentation:
   Enabled: false
 
 Style/TrailingCommaInArguments:
-  Description: 'Checks for trailing comma in argument lists.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
-  Enabled: true
   EnforcedStyleForMultiline: comma
 
 Style/TrailingCommaInArrayLiteral:
-  Description: 'Checks for trailing comma in array literals.'
-  StyleGuide: '#no-trailing-array-commas'
-  Enabled: true
   EnforcedStyleForMultiline: consistent_comma
 
 Style/TrailingCommaInHashLiteral:
-  Description: 'Checks for trailing comma in hash literals.'
-  Enabled: true
+  Description: Checks for trailing comma in hash literals.
   EnforcedStyleForMultiline: consistent_comma
 
 Style/StringLiterals:
-  Description: Checks if uses of quotes match the configured preference.
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-string-literals
-  Enabled: true
   EnforcedStyle: single_quotes
   SupportedStyles:
     - single_quotes
     - double_quotes
 
 Style/StringLiteralsInInterpolation:
-  Description: Checks if uses of quotes inside expressions in interpolated strings
-    match the configured preference.
-  Enabled: true
   EnforcedStyle: single_quotes
   SupportedStyles:
     - single_quotes
     - double_quotes
 
 Layout/DotPosition:
-  Description: Checks the position of the dot in multi-line method calls.
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains
   Enabled: true
   EnforcedStyle: trailing
   SupportedStyles:
@@ -97,8 +77,6 @@ Layout/DotPosition:
     - trailing
 
 Style/GuardClause:
-  Description: Check for conditionals that can be replaced with guard clauses
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals
   Enabled: true
   MinBodyLength: 1
 
