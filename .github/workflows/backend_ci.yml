@@ -42,6 +42,9 @@ jobs:
           bundler-cache: true
           working-directory: backend
 
+      - name: Run Code Analysis
+        run: bundle exec rails code:linters
+
       - name: Setup Database
         run: bundle exec rails db:create db:migrate
 
