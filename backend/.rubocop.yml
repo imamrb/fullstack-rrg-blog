@@ -19,7 +19,7 @@ AllCops:
   NewCops: enable
 
 Layout/LineLength:
-  Max: 110
+  Max: 130
 
 Metrics/MethodLength:
   Enabled: true

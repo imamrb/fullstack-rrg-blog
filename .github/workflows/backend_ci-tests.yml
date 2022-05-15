@@ -1,15 +1,15 @@
 name: Backend CI - Tests
 
-on: [pull_request]
-
-defaults:
-  run:
-    working-directory: ./backend
+on: [push, pull_request]
 
 jobs:
   test:
     name: RSpec
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+
+    defaults:
+      run:
+        working-directory: backend
 
     services:
       postgres:
@@ -26,6 +26,9 @@ jobs:
       DATABASE_USER: postgres
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Install required Packages
         run: |
           sudo apt-get update &&
@@ -34,13 +37,11 @@ jobs:
           --no-install-recommends \
           libpq-dev libvips42 postgresql postgresql-contrib
 
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          working-directory: backend
 
       - name: Setup Database
         run: bundle exec rails db:create db:migrate
