@@ -10,6 +10,9 @@ development:
 test:
   <<: *default
   database: <%= ENV.fetch('DATABASE_NAME', 'rrg_blog_test') %><%= ENV['TEST_ENV_NUMBER'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
