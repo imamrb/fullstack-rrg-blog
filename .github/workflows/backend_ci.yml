@@ -4,6 +4,7 @@ on: [pull_request]
 
 jobs:
   test:
+    name: Test Suite with Linters
     runs-on: ubuntu-20.04
 
     defaults:
@@ -43,7 +44,7 @@ jobs:
           bundler-cache: true
           working-directory: backend
 
-      - name: Run Code Analysis
+      - name: Run Linters
         run: bundle exec rails code:linters
 
       - name: Setup Database
