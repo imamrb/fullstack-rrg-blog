@@ -1,0 +1,49 @@
+name: Backend CI - Tests
+
+on: [pull_request]
+
+defaults:
+  run:
+    working-directory: ./backend
+
+jobs:
+  test:
+    name: RSpec
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DATABASE_HOST: localhost
+      DATABASE_USER: postgres
+
+    steps:
+      - name: Install required Packages
+        run: |
+          sudo apt-get update &&
+          sudo apt-get install \
+          --assume-yes \
+          --no-install-recommends \
+          libpq-dev libvips42 postgresql postgresql-contrib
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Database
+        run: bundle exec rails db:create db:migrate
+
+      - name: Run Test Suite
+        run: bundle exec rspec

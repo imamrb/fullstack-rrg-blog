@@ -1,0 +1,51 @@
+name: Backend CI - Lint
+
+on: [push, pull_request]
+
+defaults:
+  run:
+    working-directory: ./backend
+
+jobs:
+  lint:
+    name: Linter
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+
+    steps:
+      - name: Install required Packages
+        run: |
+          sudo apt-get update &&
+          sudo apt-get install \
+          --assume-yes \
+          --no-install-recommends \
+          libpq-dev libvips42 libcurl4-openssl-dev
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Brakeman Inspection
+        if: always()
+        run: bundle exec brakeman --run-all-checks --format json
+
+      - name: Rubocop Inspection
+        if: always()
+        run: bundle exec rubocop --parallel
+
+      - name: Bundler Audit Inspection
+        if: always()
+        run: bundle exec bundle-audit check --update
+
+      - name: Rails Best Practices Inspection
+        if: always()
+        run: bundle exec rails_best_practices
+
+      - name: Rubycritic Inspection
+        if: always()
+        run: bundle exec rubycritic
