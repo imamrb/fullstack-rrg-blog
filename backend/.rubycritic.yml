@@ -1,0 +1,13 @@
+mode_ci:
+  enabled: true
+  branch: main
+branch: main
+threshold_score: 10
+minimum_score: 95
+no_browser: true
+formats:
+  - html
+paths:
+  - app/
+  - lib/
+  - config/

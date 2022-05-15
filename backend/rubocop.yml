@@ -36,8 +36,8 @@ Metrics/BlockLength:
     - 'spec/**/*'
 
 Metrics/AbcSize:
-  Description: A calculated magnitude based on number of assignments, branches, and
-    conditions.
+  Description: A calculated magnitude based on number of assignments,branches,
+    and conditions.
   Max: 19
   IgnoredMethods:
     - change
@@ -59,15 +59,9 @@ Style/TrailingCommaInHashLiteral:
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes
-  SupportedStyles:
-    - single_quotes
-    - double_quotes
 
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: single_quotes
-  SupportedStyles:
-    - single_quotes
-    - double_quotes
 
 Layout/DotPosition:
   Enabled: true
