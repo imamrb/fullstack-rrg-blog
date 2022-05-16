@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
+
+development:
+  <<: *default
+  database: rrg_blog_development
+
+test:
+  <<: *default
+  database: <%= ENV.fetch('DATABASE_NAME', 'rrg_blog_test') %><%= ENV['TEST_ENV_NUMBER'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+
+production:
+  <<: *default
+  reaping_frequency: 3600
+  database: <%= ENV.fetch('DATABASE_NAME', 'rrg_blog_production') %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
