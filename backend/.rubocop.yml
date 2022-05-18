@@ -74,6 +74,10 @@ Style/GuardClause:
   Enabled: true
   MinBodyLength: 1
 
+Naming/RescuedExceptionsVariableName:
+  Enabled: true
+  PreferredName: error
+
 RSpec/FilePath:
   Enabled: false
 

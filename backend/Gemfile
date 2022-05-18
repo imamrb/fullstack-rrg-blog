@@ -31,6 +31,15 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # making cross-origin AJAX possible
 # gem 'rack-cors'
 
+gem 'action_policy-graphql'
+gem 'apollo_upload_server'
+gem 'dotenv-rails'
+gem 'graphql'
+gem 'rack-cors'
+gem 'recursive-open-struct'
+gem 'search_object'
+gem 'search_object_graphql'
+
 group :development, :test do
   gem 'awesome_print'
   gem 'bullet'
