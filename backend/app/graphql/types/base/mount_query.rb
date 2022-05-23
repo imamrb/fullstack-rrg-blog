@@ -10,7 +10,7 @@ module MountQuery
       field(
         query_klass.graphql_name.underscore.to_sym,
         resolver: query_klass,
-        **custom_kwargs
+        **custom_kwargs,
       )
     end
   end

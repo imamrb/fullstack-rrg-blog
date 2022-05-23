@@ -10,7 +10,7 @@ module MountMutation
       field(
         mutation_class.graphql_name.underscore.to_sym,
         mutation: mutation_class,
-        **custom_kwargs
+        **custom_kwargs,
       )
     end
   end
